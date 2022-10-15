@@ -23,19 +23,35 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
-        print("calculate button pressed")
-        if let numberOfSlices = Double(numberOfSlicesTextField.text!) {
-            if let numberOfEaters = Double(numberOfEatersTextField.text!) {
-                if numberOfEaters != 0 {
-                    resultLabel.text = "Each person gets \(numberOfSlices / numberOfEaters) slices"
-                } else {
-                    resultLabel.text = "Cannot divide by zero."
-                }
-            } else {
-                resultLabel.text = "Please enter a valid number of eaters."
-            }
-        } else {
-                    resultLabel.text = "Please enter a valid number of slices."
+        guard let numberOfSlices = Double(numberOfSlicesTextField.text!) else {
+            resultLabel.text = "Please enter a valid number of slices."
+            return
         }
+        
+        guard let numberOfEaters = Double(numberOfEatersTextField.text!) else {
+            resultLabel.text = "Please enter a valid number of eaters."
+            return
+        }
+        
+        guard numberOfEaters != 0 else {
+            resultLabel.text = "Cannot divide pizza by zero slices."
+            return
+        }
+        
+        resultLabel.text = "Each person gets \(numberOfSlices / numberOfEaters) slices"
+        
+//        if let numberOfSlices = Double(numberOfSlicesTextField.text!) {
+//            if let numberOfEaters = Double(numberOfEatersTextField.text!) {
+//                if numberOfEaters != 0 {
+//                    resultLabel.text = "Each person gets \(numberOfSlices / numberOfEaters) slices"
+//                } else {
+//                    resultLabel.text = "Cannot divide by zero."
+//                }
+//            } else {
+//                resultLabel.text = "Please enter a valid number of eaters."
+//            }
+//        } else {
+//                    resultLabel.text = "Please enter a valid number of slices."
+//        }
     }
 }
